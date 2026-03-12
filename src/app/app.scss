@@ -1,0 +1,9 @@
+.spacer {
+    flex: 1 1 auto;
+}
+
+.content {
+    min-height: calc(100vh - 64px);
+    display: flex;
+    flex-direction: column;
+}

@@ -1,0 +1,52 @@
+<div class="cart-container">
+    <h1>My Cart</h1>
+
+    @if(cartItems().length > 0) {
+    <div class="cart-items">
+        @for(item of cartItems(); track item.toy.toyId) {
+        <mat-card class="cart-item">
+            <div class="item-content">
+                <img [src]="utils.getImageUrl(item.toy)" [alt]="item.toy.name">
+
+                <div class="item-details">
+                    <h3>{{ item.toy.name }}</h3>
+                    <p class="price">{{ utils.formatPrice(item.toy.price) }}</p>
+
+                    <div class="quantity-controls">
+                        <button mat-icon-button (click)="updateQuantity(item.toy.toyId, -1)">
+                            <mat-icon>remove</mat-icon>
+                        </button>
+                        <span class="quantity">{{ item.quantity }}</span>
+                        <button mat-icon-button (click)="updateQuantity(item.toy.toyId, 1)">
+                            <mat-icon>add</mat-icon>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="item-actions">
+                    <button mat-button color="warn" (click)="removeItem(item.toy.toyId)">
+                        <mat-icon>delete</mat-icon> Remove
+                    </button>
+                </div>
+            </div>
+        </mat-card>
+        }
+    </div>
+
+    <mat-card class="checkout-card">
+        <h2>Total: {{ utils.formatPrice(totalPrice()) }}</h2>
+        <button mat-raised-button color="primary" (click)="checkout()">
+            <mat-icon>payment</mat-icon> Pay Now
+        </button>
+    </mat-card>
+    } @else {
+    <mat-card class="empty-cart">
+        <mat-icon>shopping_cart</mat-icon>
+        <h3>Your cart is empty</h3>
+        <p>Add some toys to get started!</p>
+        <a routerLink="/" mat-raised-button color="primary">
+            Browse Toys
+        </a>
+    </mat-card>
+    }
+</div>

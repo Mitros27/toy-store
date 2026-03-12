@@ -1,0 +1,32 @@
+<div class="login-container">
+    <mat-card class="login-card">
+        <mat-card-content>
+            <h2>Login</h2>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" [(ngModel)]="email">
+                <mat-icon matSuffix>email</mat-icon>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Password</mat-label>
+                <input matInput type="password" [(ngModel)]="password">
+                <mat-icon matSuffix>lock</mat-icon>
+            </mat-form-field>
+
+            @if(errorMessage) {
+            <p class="error">{{ errorMessage }}</p>
+            }
+        </mat-card-content>
+
+        <mat-card-actions>
+            <button mat-raised-button color="primary" (click)="doLogin()">
+                Login
+            </button>
+        </mat-card-actions>
+        <div class="register-link">
+            Don't have an account? <a routerLink="/register">Register</a>
+        </div>
+    </mat-card>
+</div>

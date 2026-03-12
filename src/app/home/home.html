@@ -1,0 +1,143 @@
+@if(toys().length > 0) {
+<div class="home-container">
+
+    <!-- Preporučene igračke -->
+    <!-- Preporučene igračke -->
+    @if(getRecommendedToys().length > 0 && !hasFiltersActive()) {
+    <div class="recommended-section">
+        <h3><mat-icon>favorite</mat-icon> Recommended for You</h3>
+        <div class="recommended-scroll">
+            @for(toy of getRecommendedToys().slice(0, 5); track toy.toyId) {
+            <a [routerLink]="['/toy', toy.toyId]" class="recommended-item">
+                <img [src]="utils.getImageUrl(toy)" [alt]="toy.name">
+                <div class="recommended-info">
+                    <span class="name">{{ toy.name }}</span>
+                    <span class="price">{{ utils.formatPrice(toy.price) }}</span>
+                </div>
+            </a>
+            }
+        </div>
+    </div>
+    }
+
+    <!-- Search i filteri -->
+    <mat-expansion-panel class="filters-panel">
+        <mat-expansion-panel-header>
+            <mat-panel-title>
+                <mat-icon>search</mat-icon> Search & Filters
+            </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <div class="filters">
+            <mat-form-field appearance="outline" class="search-field">
+                <mat-label>Search by name or description</mat-label>
+                <input matInput [(ngModel)]="searchText">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+
+            <div class="filter-row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Type</mat-label>
+                    <mat-select [(ngModel)]="selectedType">
+                        <mat-option [value]="null">All Types</mat-option>
+                        @for(type of types(); track type.typeId) {
+                        <mat-option [value]="type.typeId">{{ type.name }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Age Group</mat-label>
+                    <mat-select [(ngModel)]="selectedAgeGroup">
+                        <mat-option [value]="null">All Ages</mat-option>
+                        @for(age of ageGroups(); track age.ageGroupId) {
+                        <mat-option [value]="age.ageGroupId">{{ age.name }}</mat-option>
+                        }
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Target Group</mat-label>
+                    <mat-select [(ngModel)]="selectedTargetGroup">
+                        <mat-option value="">All</mat-option>
+                        <mat-option value="dečak">Boys</mat-option>
+                        <mat-option value="devojčica">Girls</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="filter-row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Min Price (RSD)</mat-label>
+                    <input matInput type="number" [(ngModel)]="minPrice">
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Max Price (RSD)</mat-label>
+                    <input matInput type="number" [(ngModel)]="maxPrice">
+                </mat-form-field>
+            </div>
+
+            <div class="filter-row">
+                <mat-form-field appearance="outline">
+                    <mat-label>Production Date From</mat-label>
+                    <input matInput [matDatepicker]="pickerFrom" [(ngModel)]="dateFrom">
+                    <mat-datepicker-toggle matSuffix [for]="pickerFrom"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerFrom></mat-datepicker>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Production Date To</mat-label>
+                    <input matInput [matDatepicker]="pickerTo" [(ngModel)]="dateTo">
+                    <mat-datepicker-toggle matSuffix [for]="pickerTo"></mat-datepicker-toggle>
+                    <mat-datepicker #pickerTo></mat-datepicker>
+                </mat-form-field>
+
+                <button mat-raised-button color="warn" (click)="clearFilters()">
+                    <mat-icon>clear</mat-icon> Clear Filters
+                </button>
+            </div>
+        </div>
+    </mat-expansion-panel>
+
+    <!-- Rezultati -->
+    <h2 class="all-toys-title">All Toys</h2>
+    <p class="results-count">Showing {{ filteredToys().length }} of {{ toys().length }} toys</p>
+
+    <!-- Igračke -->
+    <div class="toys-grid">
+        @for(toy of filteredToys(); track toy.toyId) {
+        <mat-card class="toy-card">
+            <img mat-card-image [src]="utils.getImageUrl(toy)" [alt]="toy.name">
+            <mat-card-content>
+                <h3>{{ toy.name }}</h3>
+                <p class="price">{{ utils.formatPrice(toy.price) }}</p>
+                <p class="info">{{ toy.type.name }} | {{ toy.ageGroup.name }}</p>
+            </mat-card-content>
+            <mat-card-actions>
+                <a mat-button [routerLink]="['/toy', toy.toyId]">
+                    <mat-icon>info</mat-icon> Details
+                </a>
+                @if(isLoggedIn()) {
+                <button mat-button color="primary" (click)="addToCart(toy)">
+                    <mat-icon>add_shopping_cart</mat-icon> Add
+                </button>
+                }
+            </mat-card-actions>
+        </mat-card>
+        }
+    </div>
+
+    @if(filteredToys().length === 0) {
+    <mat-card class="no-results">
+        <mat-icon>search_off</mat-icon>
+        <h3>No toys found</h3>
+        <p>Try adjusting your filters</p>
+        <button mat-raised-button color="primary" (click)="clearFilters()">
+            Clear Filters
+        </button>
+    </mat-card>
+    }
+</div>
+} @else {
+<app-loading />
+}

@@ -1,0 +1,181 @@
+.home-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.filters-panel {
+    margin-bottom: 20px;
+}
+
+.filters {
+    padding: 10px 0;
+}
+
+.search-field {
+    width: 100%;
+}
+
+.filter-row {
+    display: flex;
+    gap: 15px;
+    margin-top: 15px;
+    flex-wrap: wrap;
+}
+
+.filter-row mat-form-field {
+    flex: 1;
+    min-width: 150px;
+}
+
+.filter-row button {
+    height: 56px;
+}
+
+.results-count {
+    color: #666;
+    margin-bottom: 15px;
+}
+
+.toys-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 20px;
+}
+
+.toy-card {
+    display: flex;
+    flex-direction: column;
+}
+
+.toy-card img {
+    height: 200px;
+    object-fit: cover;
+}
+
+.toy-card mat-card-content {
+    flex: 1;
+}
+
+.toy-card h3 {
+    margin: 0 0 10px 0;
+    font-size: 18px;
+}
+
+.toy-card .price {
+    color: #00796b;
+    font-weight: 500;
+    font-size: 16px;
+    margin: 5px 0;
+}
+
+.toy-card .info {
+    color: #666;
+    font-size: 14px;
+}
+
+.toy-card mat-card-actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+.no-results {
+    text-align: center;
+    padding: 50px;
+    margin-top: 20px;
+}
+
+.no-results mat-icon {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: #ccc;
+}
+
+.no-results h3 {
+    margin: 20px 0 10px 0;
+}
+
+.no-results p {
+    color: #666;
+    margin-bottom: 20px;
+}
+
+.recommended-section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background: #f5f5f5;
+    border-radius: 8px;
+    border-left: 4px solid #e91e63;
+}
+
+.recommended-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 12px 0;
+    font-size: 16px;
+    color: #333;
+}
+
+.recommended-section h3 mat-icon {
+    color: #e91e63;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.recommended-scroll {
+    display: flex;
+    gap: 15px;
+    overflow-x: auto;
+    padding-bottom: 5px;
+}
+
+.recommended-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px 12px;
+    background: white;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    min-width: 200px;
+    transition: box-shadow 0.2s;
+}
+
+.recommended-item:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.recommended-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 6px;
+}
+
+.recommended-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.recommended-info .name {
+    font-weight: 500;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 120px;
+}
+
+.recommended-info .price {
+    color: #00796b;
+    font-size: 13px;
+}
+
+
+.all-toys-title {
+    margin: 20px 0 10px 0;
+}

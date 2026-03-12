@@ -1,0 +1,48 @@
+.details-container {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+.details-card {
+    max-width: 500px;
+    width: 100%;
+}
+
+.details-card img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
+h1 {
+    font-size: 22px;
+    margin: 10px 0;
+}
+
+.price {
+    color: #00796b;
+    font-size: 18px;
+    margin: 5px 0 12px 0;
+}
+
+.description {
+    margin: 12px 0;
+    line-height: 1.5;
+    color: #444;
+    font-size: 14px;
+}
+
+.chips {
+    margin: 12px 0;
+}
+
+.production-date {
+    color: #666;
+    font-size: 12px;
+    margin-top: 12px;
+}
+
+mat-card-actions {
+    padding: 14px;
+}

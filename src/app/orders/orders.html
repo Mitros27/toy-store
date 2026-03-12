@@ -1,0 +1,50 @@
+<div class="orders-container">
+    <h1>My Orders</h1>
+
+    <!-- Paid Orders -->
+    <mat-card class="orders-section">
+        <h2><mat-icon>schedule</mat-icon> Pending Delivery</h2>
+        @if(paidOrders().length > 0) {
+        @for(item of paidOrders(); track item.toy.toyId) {
+        <app-order [item]="item" (statusChanged)="onStatusChanged(item.toy.toyId, $event)"></app-order>
+        }
+        } @else {
+        <p class="empty-message">No pending orders</p>
+        }
+    </mat-card>
+
+    <!-- Arrived Orders -->
+    <mat-card class="orders-section">
+        <h2><mat-icon>check_circle</mat-icon> Arrived</h2>
+        @if(arrivedOrders().length > 0) {
+        @for(item of arrivedOrders(); track item.toy.toyId) {
+        <app-order [item]="item" (rated)="onRated(item.toy.toyId, $event)"></app-order>
+        }
+        } @else {
+        <p class="empty-message">No arrived orders</p>
+        }
+    </mat-card>
+
+    <!-- Cancelled Orders -->
+    <mat-card class="orders-section">
+        <h2><mat-icon>cancel</mat-icon> Cancelled</h2>
+        @if(cancelledOrders().length > 0) {
+        @for(item of cancelledOrders(); track item.toy.toyId) {
+        <app-order [item]="item" [showActions]="false"></app-order>
+        }
+        } @else {
+        <p class="empty-message">No cancelled orders</p>
+        }
+    </mat-card>
+
+    @if(paidOrders().length === 0 && arrivedOrders().length === 0 && cancelledOrders().length === 0) {
+    <mat-card class="empty-orders">
+        <mat-icon>receipt_long</mat-icon>
+        <h3>No orders yet</h3>
+        <p>Start shopping to see your orders here!</p>
+        <a routerLink="/" mat-raised-button color="primary">
+            Browse Toys
+        </a>
+    </mat-card>
+    }
+</div>

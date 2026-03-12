@@ -1,0 +1,109 @@
+@if(user()) {
+<div class="user-container">
+    <mat-card class="user-card">
+        <!-- Header sa avatarem -->
+        <div class="user-header">
+            <img [src]="getAvatarUrl()" class="user-avatar">
+            <div class="user-info">
+                <h2>{{ user()!.firstName }} {{ user()!.lastName }}</h2>
+                <p>Total orders: {{ getTotalOrders() }}</p>
+                <p>Address: {{ user()!.address }}</p>
+            </div>
+        </div>
+
+        <!-- Change Password -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon>key</mat-icon> Change Password
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="panel-content">
+                <mat-form-field appearance="fill">
+                    <mat-label>Old password</mat-label>
+                    <input matInput type="password" [(ngModel)]="oldPassword">
+                </mat-form-field>
+
+                <div class="form-row">
+                    <mat-form-field appearance="fill">
+                        <mat-label>New password</mat-label>
+                        <input matInput type="password" [(ngModel)]="newPassword">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Repeat password</mat-label>
+                        <input matInput type="password" [(ngModel)]="repeatPassword">
+                    </mat-form-field>
+                </div>
+
+                <button mat-button color="primary" (click)="changePassword()">
+                    <mat-icon>send</mat-icon> Submit
+                </button>
+            </div>
+        </mat-expansion-panel>
+
+        <!-- Update Profile -->
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon>person</mat-icon> Update profile
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <div class="panel-content">
+                <mat-form-field appearance="fill">
+                    <mat-label>Email</mat-label>
+                    <input matInput [value]="user()!.email" disabled>
+                </mat-form-field>
+
+                <div class="form-row">
+                    <mat-form-field appearance="fill">
+                        <mat-label>First Name</mat-label>
+                        <input matInput [(ngModel)]="firstName">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Last Name</mat-label>
+                        <input matInput [(ngModel)]="lastName">
+                    </mat-form-field>
+                </div>
+
+                <div class="form-row">
+                    <mat-form-field appearance="fill">
+                        <mat-label>Phone</mat-label>
+                        <input matInput [(ngModel)]="phone">
+                    </mat-form-field>
+
+                    <mat-form-field appearance="fill">
+                        <mat-label>Address</mat-label>
+                        <input matInput [(ngModel)]="address">
+                    </mat-form-field>
+                </div>
+
+                <div class="favorites-section">
+                    <h4>Favorite Toy Types</h4>
+                    <div class="favorites-grid">
+                        @for(type of types(); track type.typeId) {
+                        <mat-checkbox [checked]="isFavorite(type.name)" (click)="toggleFavorite(type.name)">
+                            {{ type.name }}
+                        </mat-checkbox>
+                        }
+                    </div>
+                </div>
+
+                <button mat-button color="primary" (click)="updateProfile()">
+                    <mat-icon>send</mat-icon> Submit
+                </button>
+            </div>
+        </mat-expansion-panel>
+
+        <!-- Logout -->
+        <div class="logout-section">
+            <button mat-raised-button color="warn" (click)="logout()">
+                <mat-icon>logout</mat-icon> Logout
+            </button>
+        </div>
+    </mat-card>
+</div>
+}

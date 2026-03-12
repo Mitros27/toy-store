@@ -1,0 +1,99 @@
+.user-container {
+    display: flex;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+.user-card {
+    max-width: 700px;
+    width: 100%;
+    padding: 0;
+    overflow: hidden;
+}
+
+.user-header {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 25px;
+    background: #f5f5f5;
+    border-bottom: 1px solid #eee;
+}
+
+.user-avatar {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+}
+
+.user-info h2 {
+    margin: 0 0 5px 0;
+    font-size: 22px;
+    color: #333;
+}
+
+.user-info p {
+    margin: 3px 0;
+    font-size: 14px;
+    color: #666;
+}
+
+mat-expansion-panel {
+    border-radius: 0 !important;
+    box-shadow: none !important;
+    border-bottom: 1px solid #eee;
+}
+
+mat-expansion-panel-header {
+    padding: 0 25px;
+}
+
+mat-panel-title {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.panel-content {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 10px 0;
+}
+
+.panel-content mat-form-field {
+    width: 100%;
+}
+
+.panel-content button {
+    align-self: flex-start;
+}
+
+.form-row {
+    display: flex;
+    gap: 15px;
+}
+
+.form-row mat-form-field {
+    flex: 1;
+}
+
+.favorites-section {
+    margin: 10px 0;
+}
+
+.favorites-section h4 {
+    margin: 0 0 10px 0;
+    font-weight: 500;
+}
+
+.favorites-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+    gap: 5px;
+}
+
+.logout-section {
+    padding: 20px 25px;
+    text-align: center;
+}

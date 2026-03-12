@@ -1,0 +1,28 @@
+<mat-toolbar color="primary">
+    <span><strong>Toy Store</strong></span>
+    <span class="spacer"></span>
+    <a routerLink="/" mat-button>
+        <mat-icon>home</mat-icon> Home
+    </a>
+    @if(authService.getActiveUser()) {
+    <a routerLink="/cart" mat-button>
+        <mat-icon>shopping_cart</mat-icon> Cart
+    </a>
+    <a routerLink="/orders" mat-button>
+        <mat-icon>receipt_long</mat-icon> Orders
+    </a>
+    <a routerLink="/user" mat-button>
+        <mat-icon>person</mat-icon> Profile
+    </a>
+    <button mat-button (click)="logout()">
+        <mat-icon>logout</mat-icon> Logout
+    </button>
+    } @else {
+    <a routerLink="/login" mat-button>
+        <mat-icon>login</mat-icon> Login
+    </a>
+    }
+</mat-toolbar>
+<div class="content">
+    <router-outlet />
+</div>

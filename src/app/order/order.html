@@ -1,0 +1,45 @@
+<div class="order-row">
+    <img [src]="utils.getImageUrl(item.toy)" [alt]="item.toy.name">
+
+    <div class="order-info">
+        <span class="name">{{ item.toy.name }}</span>
+        <span class="quantity">x{{ item.quantity }}</span>
+    </div>
+
+    <div class="order-price">
+        {{ utils.formatPrice(item.toy.price * item.quantity) }}
+    </div>
+
+    <div class="order-date">
+        {{ utils.formatDate(item.paidAt!) }}
+    </div>
+
+    <div class="order-actions">
+        @if(item.status === CartStatus.REZERVISANO && showActions) {
+        <button mat-button color="primary" (click)="markAsArrived()">
+            <mat-icon>check</mat-icon> Arrived
+        </button>
+        <button mat-button color="warn" (click)="cancelOrder()">
+            <mat-icon>cancel</mat-icon> Cancel
+        </button>
+        }
+
+        @if(item.status === CartStatus.PRISTIGLO && showActions) {
+        @if(item.rating) {
+        <div class="rating-display">
+            @for(star of stars; track star) {
+            <mat-icon [class.filled]="star <= item.rating!">star</mat-icon>
+            }
+        </div>
+        } @else {
+        <div class="rating-input">
+            @for(star of stars; track star) {
+            <button mat-icon-button (click)="rate(star)">
+                <mat-icon>star_border</mat-icon>
+            </button>
+            }
+        </div>
+        }
+        }
+    </div>
+</div>
