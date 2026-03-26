@@ -25,6 +25,7 @@ export class CartService {
             existingItem.quantity++
         } else {
             const newItem: CartItemModel = {
+                orderId: crypto.randomUUID(),
                 toy: toy,
                 quantity: 1,
                 status: CartStatus.REZERVISANO,
@@ -120,6 +121,7 @@ export class CartService {
             } else {
                 groupedItems[toyId] = {
                     ...item,
+                    orderId: crypto.randomUUID(),
                     status: CartStatus.REZERVISANO,
                     paidAt: new Date().toISOString()
                 }

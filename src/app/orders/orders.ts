@@ -37,15 +37,15 @@ export class Orders {
     this.cancelledOrders.set(orders.filter(o => o.status === CartStatus.OTKAZANO))
   }
 
-  onStatusChanged(toyId: number, newStatus: CartStatus) {
+  onStatusChanged(orderId: string, newStatus: CartStatus) {
     if (newStatus === CartStatus.OTKAZANO) {
       Alerts.confirm('Do you want to cancel this order?', () => {
-        OrderService.updateOrderStatus(toyId, newStatus)
+        OrderService.updateOrderStatus(orderId, newStatus)
         this.loadOrders()
         Alerts.success('Order cancelled!')
       })
     } else {
-      OrderService.updateOrderStatus(toyId, newStatus)
+      OrderService.updateOrderStatus(orderId, newStatus)
       this.loadOrders()
       if (newStatus === CartStatus.PRISTIGLO) {
         Alerts.success('Order marked as arrived!')
@@ -53,8 +53,8 @@ export class Orders {
     }
   }
 
-  onRated(toyId: number, rating: number) {
-    OrderService.rateOrder(toyId, rating)
+  onRated(orderId: string, rating: number) {
+    OrderService.rateOrder(orderId, rating)
     this.loadOrders()
     Alerts.success('Thank you for your rating!')
   }

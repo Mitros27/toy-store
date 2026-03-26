@@ -1,6 +1,4 @@
 import { UserModel } from "../../model/user.model";
-import { CartItemModel } from "../../model/user.model";
-import { CartStatus } from "../../model/user.model";
 const USERS = 'users'
 const ACTIVE = 'active'
 export class AuthService {
@@ -33,8 +31,9 @@ export class AuthService {
     }
     static getActiveUser(): UserModel | null {
         const users = this.getUsers()
+        const email = localStorage.getItem(ACTIVE)
         for (let u of users) {
-            if (u.email === localStorage.getItem(ACTIVE)) {
+            if (u.email === email) {
                 return u
             }
         }
@@ -71,8 +70,9 @@ export class AuthService {
     }
     static updateActiveUserPassword(newPassword: string) {
         const users = this.getUsers()
+        const email = localStorage.getItem(ACTIVE)
         for (let u of users) {
-            if (u.email === localStorage.getItem(ACTIVE)) {
+            if (u.email === email) {
                 u.password = newPassword
             }
         }

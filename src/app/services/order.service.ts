@@ -10,28 +10,50 @@ export class OrderService {
         return []
     }
 
-    static updateOrderStatus(toyId: number, newStatus: CartStatus) {
+    static updateOrderStatus(orderId: string, newStatus: CartStatus) {
         const user = AuthService.getActiveUser()
         if (!user || !user.orders) return
 
         for (let order of user.orders) {
-            if (order.toy.toyId === toyId) {
+            if (order.orderId === orderId) {
                 order.status = newStatus
             }
         }
         OrderService.saveOrders(user.orders)
     }
 
-    static rateOrder(toyId: number, rating: number) {
+    static rateOrder(orderId: string, rating: number) {
         const user = AuthService.getActiveUser()
         if (!user || !user.orders) return
 
         for (let order of user.orders) {
-            if (order.toy.toyId === toyId && order.status === CartStatus.PRISTIGLO) {
+            if (order.orderId === orderId && order.status === CartStatus.PRISTIGLO) {
                 order.rating = rating
             }
         }
         OrderService.saveOrders(user.orders)
+    }
+
+    static getAverageRatingForToy(toyId: number): number | null {
+        const users = AuthService.getUsers()
+
+        const ratings: number[] = []
+        for (let user of users) {
+            if (!user.orders) continue
+            for (let order of user.orders) {
+                if (order.toy.toyId === toyId && order.status === CartStatus.PRISTIGLO && order.rating !== null) {
+                    ratings.push(order.rating!)
+                }
+            }
+        }
+
+        if (ratings.length === 0) return null
+
+        let sum = 0
+        for (let r of ratings) {
+            sum += r
+        }
+        return Number((sum / ratings.length).toFixed(1))
     }
 
     static saveOrders(orders: CartItemModel[]) {

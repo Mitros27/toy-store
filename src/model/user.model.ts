@@ -7,6 +7,7 @@ export enum CartStatus {
 }
 
 export interface CartItemModel {
+    orderId: string
     toy: ToyModel
     quantity: number
     status: CartStatus

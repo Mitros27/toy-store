@@ -15,6 +15,7 @@ import { AuthService } from '../services/auth.service'
 import { Utils } from '../utils'
 import { Loading } from '../loading/loading'
 import { Alerts } from '../alerts'
+import { OrderService } from '../services/order.service'
 import { MatDatepickerModule } from '@angular/material/datepicker'
 import { MatNativeDateModule } from '@angular/material/core'
 
@@ -50,6 +51,7 @@ export class Home {
   maxPrice: number | null = null
   dateFrom: Date | null = null
   dateTo: Date | null = null
+  minRating: number | null = null
 
   constructor(public utils: Utils) {
     this.loadData()
@@ -124,6 +126,14 @@ export class Home {
         }
       }
 
+      // Filter po oceni
+      if (this.minRating) {
+        const rating = this.getAverageRating(toy.toyId)
+        if (rating === null || rating < this.minRating) {
+          return false
+        }
+      }
+
       return true
     })
   }
@@ -137,6 +147,7 @@ export class Home {
     this.maxPrice = null
     this.dateFrom = null
     this.dateTo = null
+    this.minRating = null
   }
   addToCart(toy: ToyModel) {
     CartService.addToCart(toy)
@@ -147,9 +158,13 @@ export class Home {
     return AuthService.getActiveUser() !== null
   }
 
+  getAverageRating(toyId: number): number | null {
+    return OrderService.getAverageRatingForToy(toyId)
+  }
+
   hasFiltersActive(): boolean {
     return !!(this.searchText || this.selectedType || this.selectedAgeGroup ||
       this.selectedTargetGroup || this.minPrice || this.maxPrice ||
-      this.dateFrom || this.dateTo)
+      this.dateFrom || this.dateTo || this.minRating)
   }
 }

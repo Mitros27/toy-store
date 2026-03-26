@@ -5,8 +5,8 @@
     <mat-card class="orders-section">
         <h2><mat-icon>schedule</mat-icon> Pending Delivery</h2>
         @if(paidOrders().length > 0) {
-        @for(item of paidOrders(); track item.toy.toyId) {
-        <app-order [item]="item" (statusChanged)="onStatusChanged(item.toy.toyId, $event)"></app-order>
+        @for(item of paidOrders(); track item.orderId) {
+        <app-order [item]="item" (statusChanged)="onStatusChanged(item.orderId, $event)"></app-order>
         }
         } @else {
         <p class="empty-message">No pending orders</p>
@@ -17,8 +17,8 @@
     <mat-card class="orders-section">
         <h2><mat-icon>check_circle</mat-icon> Arrived</h2>
         @if(arrivedOrders().length > 0) {
-        @for(item of arrivedOrders(); track item.toy.toyId) {
-        <app-order [item]="item" (rated)="onRated(item.toy.toyId, $event)"></app-order>
+        @for(item of arrivedOrders(); track item.orderId) {
+        <app-order [item]="item" (rated)="onRated(item.orderId, $event)"></app-order>
         }
         } @else {
         <p class="empty-message">No arrived orders</p>
@@ -29,7 +29,7 @@
     <mat-card class="orders-section">
         <h2><mat-icon>cancel</mat-icon> Cancelled</h2>
         @if(cancelledOrders().length > 0) {
-        @for(item of cancelledOrders(); track item.toy.toyId) {
+        @for(item of cancelledOrders(); track item.orderId) {
         <app-order [item]="item" [showActions]="false"></app-order>
         }
         } @else {

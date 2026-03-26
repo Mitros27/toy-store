@@ -75,6 +75,18 @@
                     <mat-label>Max Price (RSD)</mat-label>
                     <input matInput type="number" [(ngModel)]="maxPrice">
                 </mat-form-field>
+
+                <mat-form-field appearance="outline">
+                    <mat-label>Min Rating</mat-label>
+                    <mat-select [(ngModel)]="minRating">
+                        <mat-option [value]="null">All</mat-option>
+                        <mat-option [value]="1">⭐ 1+</mat-option>
+                        <mat-option [value]="2">⭐ 2+</mat-option>
+                        <mat-option [value]="3">⭐ 3+</mat-option>
+                        <mat-option [value]="4">⭐ 4+</mat-option>
+                        <mat-option [value]="5">⭐ 5</mat-option>
+                    </mat-select>
+                </mat-form-field>
             </div>
 
             <div class="filter-row">
@@ -112,6 +124,11 @@
                 <h3>{{ toy.name }}</h3>
                 <p class="price">{{ utils.formatPrice(toy.price) }}</p>
                 <p class="info">{{ toy.type.name }} | {{ toy.ageGroup.name }}</p>
+                @if(getAverageRating(toy.toyId) !== null) {
+                <p class="rating">⭐ {{ getAverageRating(toy.toyId) }}/5</p>
+                } @else {
+                <p class="rating no-rating">No ratings yet</p>
+                }
             </mat-card-content>
             <mat-card-actions>
                 <a mat-button [routerLink]="['/toy', toy.toyId]">

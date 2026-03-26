@@ -7,27 +7,21 @@ const client = axios.create({
     headers: {
         'Accept': 'application/json'
     },
-    validateStatus(status){
+    validateStatus(status) {
         return status === 200
     }
 })
-export class ToyService{
-    static async getToys(){
+export class ToyService {
+    static async getToys() {
         return await client.get<ToyModel[]>('/toy')
     }
-    static async getToyById(id: number){
+    static async getToyById(id: number) {
         return await client.get<ToyModel>('/toy/' + id)
     }
-    static async getToyBYPermalink(permalink: string){
-        return await client.get<ToyModel>('/toy/permalink' + permalink)
-    }
-    static async getToyByIds(ids: number){
-        return await client.get<ToyModel[]>('/toy/' + ids)
-    }
-    static async getAgeGroup(){
+    static async getAgeGroup() {
         return await client.get<AgeGroupModel[]>('/age-group')
     }
-    static async getTypes(){
+    static async getTypes() {
         return await client.get<ToyTypeModel[]>('/type')
     }
 }
