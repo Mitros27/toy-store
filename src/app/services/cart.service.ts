@@ -111,7 +111,7 @@ export class CartService {
             user.orders = []
         }
 
-        // Grupiši stavke po toyId
+   
         const groupedItems: { [key: number]: CartItemModel } = {}
 
         for (let item of user.cart) {
@@ -128,7 +128,7 @@ export class CartService {
             }
         }
 
-        // Dodaj grupisane stavke u orders
+  
         for (let toyId in groupedItems) {
             user.orders.push(groupedItems[toyId])
         }
