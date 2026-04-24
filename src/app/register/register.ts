@@ -7,7 +7,7 @@ import { MatInputModule } from '@angular/material/input';
 import { RouterLink, Router } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { UserModel } from '../../model/user.model';
-import { User } from '../user/user';
+
 
 @Component({
   selector: 'app-register',

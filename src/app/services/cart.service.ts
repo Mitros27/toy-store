@@ -45,29 +45,6 @@ export class CartService {
         CartService.saveCart(user.cart)
     }
 
-    static updateItemStatus(toyId: number, newStatus: CartStatus) {
-        const user = AuthService.getActiveUser()
-        if (!user || !user.cart) return
-
-        for (let item of user.cart) {
-            if (item.toy.toyId === toyId) {
-                item.status = newStatus
-            }
-        }
-        CartService.saveCart(user.cart)
-    }
-
-    static rateItem(toyId: number, rating: number) {
-        const user = AuthService.getActiveUser()
-        if (!user || !user.cart) return
-
-        for (let item of user.cart) {
-            if (item.toy.toyId === toyId && item.status === CartStatus.PRISTIGLO) {
-                item.rating = rating
-            }
-        }
-        CartService.saveCart(user.cart)
-    }
 
     static getTotalPrice(): number {
         const cart = CartService.getCart()
@@ -111,7 +88,7 @@ export class CartService {
             user.orders = []
         }
 
-   
+
         const groupedItems: { [key: number]: CartItemModel } = {}
 
         for (let item of user.cart) {
@@ -128,7 +105,7 @@ export class CartService {
             }
         }
 
-  
+
         for (let toyId in groupedItems) {
             user.orders.push(groupedItems[toyId])
         }

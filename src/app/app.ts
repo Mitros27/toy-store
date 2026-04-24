@@ -12,7 +12,6 @@ import { AuthService } from './services/auth.service'
   styleUrl: './app.scss'
 })
 export class App {
-  protected readonly title = signal('toy-store');
   authService = AuthService
   constructor(private router: Router) { }
   logout() {
